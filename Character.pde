@@ -3,8 +3,7 @@ class character extends gameObject {
  int halfSize;
  double x;
  double y;
- int lives = 4;
- 
+ int lives = 100;
  
  character(double x, double y, int size)
  {
@@ -25,12 +24,8 @@ class character extends gameObject {
  {
    stroke(255,0,0);   // red character outline
    fill(255,255,255); // white character fill
-   
    circle((int)x,(int)y,size);  // character position and size
-   
  }
- 
-
  
  private void playerMoveUp()
  {
@@ -73,14 +68,39 @@ class character extends gameObject {
    }
  }
    
- private boolean objectCollision(gameObject objectIn)
+ public boolean objectCollision(gameObject objectIn)
  {
-   if(dist((float)this.x, (float)this.y, (float)objectIn.x, (float)objectIn.y) < this.size)
+   if(dist((float)this.x, (float)objectIn.x, (float)this.y, (float)objectIn.y) < this.size)
    {
      return true;
    }
    return false;
  }
+ 
+// // CIRCLE/RECTANGLE
+//boolean circleRect(float cx, float cy, float radius, float rx, float ry, float rw, float rh) {
+
+//  // temporary variables to set edges for testing
+//  float testX = cx;
+//  float testY = cy;
+
+//  // which edge is closest?
+//  if (cx < rx)         testX = rx;      // compare left edge
+//  else if (cx > rx+rw) testX = rx+rw;   // right edge
+//  if (cy < ry)         testY = ry;      // top edge
+//  else if (cy > ry+rh) testY = ry+rh;   // bottom edge
+
+//  // get distance from closest edges
+//  float distX = cx-testX;
+//  float distY = cy-testY;
+//  float distance = sqrt( (distXdistX) + (distYdistY) );
+
+//  // if the distance is less than the radius, collision!
+//  if (distance <= radius) {
+//    return true;
+//  }
+//  return false;
+//}
  
   private void characterMovement()
  {

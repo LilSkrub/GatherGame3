@@ -18,7 +18,7 @@ class gameObject{
     
   }
   
-  private void objectCollision()
+  public void objectCollision()
   {
     
   }

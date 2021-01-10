@@ -2,7 +2,6 @@
 movingBall ball1, ball2; // 2 balls,
 character character1; // 1 character, p1
 
-static int screen = 0; // program starts on the menu screen
 ArrayList<gameObject> gameObjects= new ArrayList<gameObject>(); // ArrayList for 
 ArrayList<gameObject> nonPlayerObjects= new ArrayList<gameObject>();
 
@@ -30,7 +29,7 @@ void ballSetup(int ballNumber)
 
 void draw()
 {
-  switch(screen)
+  switch(gameState.screen)
   {
     case 0:
       menuScreen();
@@ -50,6 +49,7 @@ void draw()
 
 void objectsDraw()
 {
+  
  for(gameObject object: gameObjects)
  {
     object.draw();
@@ -93,7 +93,7 @@ public void gameDeadScreen() // case 3, third screen, if you lose a life
 {
   background(0);
   text("WASTED",width/2,height/2);
-  character1.lives--;                 // removes a life from the counter
+  character1.lives = character1.lives - 1;                 // removes a life from the counter
   if(character1.lives <= 0)           // if the amount of lives is less than or equal to 0
   {
     gameState.gameEnd();                     // calls the gameEnd procedure, making screen = 3, if screen = 3 then run the gameOverScreen() procedure
@@ -104,14 +104,13 @@ public void gameOverScreen()
 {
   background(0);
   text("Game Over",width/2,height/2);
-  
 }
 
 public void keyPressed() // checks keys pressed, not based on movement
 {
   if(key == ENTER)
   {
-    if(screen == 0) // if the screen is set to main menu
+    if(gameState.screen == 0) // if the screen is set to main menu
     {
       gameState.gameStart(); // start the game
     }
